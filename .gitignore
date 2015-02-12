@@ -2,3 +2,4 @@
 anonymize_logs/logs_output
 .git
 .idea
+*.pyc
