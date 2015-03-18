@@ -16,6 +16,7 @@ import json
 from pyspark import SparkContext
 
 from anon_helper import Helper
+
 if __name__ == "__main__":
     if len(sys.argv) != 2 and len(sys.argv) != 3:
         print >> sys.stderr, "Usage: %s <input_file> [output_dir]" % (sys.argv[0])
@@ -28,7 +29,8 @@ if __name__ == "__main__":
     inputRDD = sc.textFile(input_file)
 
     helper = Helper()
-    anonEventRDD = inputRDD.map(lambda l: helper.anonymize_event(json.loads(l)))
+    #anonEventRDD = inputRDD.map(lambda l: helper.anonymize_event(json.loads(l)))
+    anonEventRDD = inputRDD.map(json.loads).map(helper.anonymize_event)
 
     if len(sys.argv) == 3:
         anonEventRDD.coalesce(anonEventRDD.getNumPartitions() - 1)\
