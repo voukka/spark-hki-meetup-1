@@ -1,9 +1,10 @@
-# import hashlib
+import hashlib
 import urlparse
-import md5py
+#import md5py
 
 
 class Helper(object):
+
     def __call__(self, argument):
         return argument
 
@@ -19,8 +20,8 @@ class Helper(object):
             return 'http', 'unknown domain', 'rest'
 
     def _hash_string(self, s):
-        # return hashlib.md5(s)
-        return md5py.md5(s).hexdigest()
+        return hashlib.md5(s).hexdigest()
+        #return md5py.md5(s).hexdigest()
 
     def _anonymize_uri(self, uri):
         parts = self._uri_parts(uri)
